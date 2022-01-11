@@ -1,33 +1,28 @@
 ﻿using Book_Shop.Business.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Book_Shop.Data.Mappings
 {
-    public class ProdutoMapping : IEntityTypeConfiguration<Produto>
+    public class ProductMapping : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<Produto> builder)
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.HasKey(_ => _.Id);
 
-            builder.Property(_ => _.Nome)
+            builder.Property(_ => _.Name)
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
-            builder.Property(_ => _.Descricao)
+            builder.Property(_ => _.Description)
                 .IsRequired()
                 .HasColumnType("varchar(1000)");
 
-            builder.Property(_ => _.Imagem)
+            builder.Property(_ => _.Image)
                 .IsRequired()
                 .HasColumnType("varchar(100)");
 
-            builder.ToTable("Produtos");
+            builder.ToTable("Products");
         }
     }
 }
