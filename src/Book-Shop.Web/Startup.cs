@@ -1,4 +1,6 @@
-﻿using Book_Shop.Data.Context;
+﻿using Book_Shop.Business.Interfaces;
+using Book_Shop.Data.Context;
+using Book_Shop.Data.Repository;
 using Book_Shop.Web.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,11 @@ namespace Book_Shop.Web
                 .AddEntityFrameworkStores<AspNetIdentityContext>();
 
             services.AddDbContext<BookShopContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<BookShopContext>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProviderRepository, ProviderRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
 
             services.AddControllersWithViews();
         }
