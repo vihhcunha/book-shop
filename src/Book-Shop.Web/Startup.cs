@@ -24,6 +24,7 @@ namespace Book_Shop.Web
             services.AddScoped<IProviderRepository, ProviderRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
 
+            services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddControllersWithViews();
         }
 
