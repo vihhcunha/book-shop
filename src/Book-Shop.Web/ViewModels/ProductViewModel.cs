@@ -8,6 +8,10 @@ namespace Book_Shop.Web.ViewModels
         [Key]
         public Guid Id { get; set; }
 
+        [Required(ErrorMessage = "The field provider it's mandatory.")]
+        [DisplayName("Provider")]
+        public Guid ProviderId { get; set; }
+
         [Required(ErrorMessage = "The field name it's mandatory.")]
         [StringLength(200, ErrorMessage = "The field {0} must have between {2} and {1} caracters.", MinimumLength = 2)]
         public string Name { get; set; }
@@ -31,5 +35,6 @@ namespace Book_Shop.Web.ViewModels
         public bool Active { get; set; }
 
         public ProviderViewModel Provider { get; set; }
+        public IEnumerable<ProviderViewModel> Providers { get; set; }
     }
 }

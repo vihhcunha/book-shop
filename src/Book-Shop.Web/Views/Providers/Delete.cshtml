@@ -1,0 +1,40 @@
+﻿@model Book_Shop.Web.ViewModels.ProviderViewModel
+
+@{
+    ViewData["Title"] = "Delete provider";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<vc:Summary></vc:Summary>
+
+<div>
+    <h4>This action cannot be undone!</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Document)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Document)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a class="btn btn-info" asp-action="Index">Back</a>
+    </form>
+</div>

@@ -22,7 +22,7 @@ namespace Book_Shop.Data.Repository
             return await _dbSet.AsNoTrackingWithIdentityResolution().Where(predicate).ToListAsync();
         }
 
-        public virtual async Task<List<TEntity>> GetAll(Guid id)
+        public virtual async Task<List<TEntity>> GetAll()
         {
             return await _dbSet.ToListAsync();
         }

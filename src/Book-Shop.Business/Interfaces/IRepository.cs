@@ -9,7 +9,7 @@ namespace Book_Shop.Business.Interfaces
         Task Remove(Guid id);
         Task Update(TEntity entity);
         Task<TEntity> GetById(Guid id);
-        Task<List<TEntity>> GetAll(Guid id);
+        Task<List<TEntity>> GetAll();
         Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate);
         Task<int> SaveChanges();
     }
