@@ -21,7 +21,7 @@ namespace Book_Shop.Web.ViewModels
         public string Description { get; set; }
 
         [DisplayName("Product image")]
-        public IFormFile ImageUpload { get; set; }
+        public IFormFile? ImageUpload { get; set; }
 
         public string? Image { get; set; }
 
