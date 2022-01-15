@@ -72,7 +72,7 @@ namespace Book_Shop.Web.Controllers
                 return false;
             }
 
-            using(var stream = new FileStream(path, FileMode.Create))
+            using (var stream = new FileStream(path, FileMode.Create))
             {
                 await imageUpload.CopyToAsync(stream);
             }
@@ -94,10 +94,29 @@ namespace Book_Shop.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Guid id, ProductViewModel productViewModel)
         {
-            productViewModel = await PopulateProviders(productViewModel);
+            if (id != productViewModel.Id) return NotFound();
+
+            var updatedProduct = await GetProduct(id);
+            productViewModel.Provider = updatedProduct.Provider;
+            productViewModel.Image = updatedProduct.Image;
+
             if (!ModelState.IsValid) return View(productViewModel);
 
-            await _productRepository.Update(_mapper.Map<Product>(productViewModel));
+            if (productViewModel.ImageUpload != null)
+            {
+                var imgPrefixo = Guid.NewGuid() + "_";
+                if (!await UploadFile(productViewModel.ImageUpload, imgPrefixo))
+                {
+                    return View(productViewModel);
+                }
+                updatedProduct.Image = imgPrefixo + productViewModel.ImageUpload.FileName;
+            }
+            updatedProduct.Name = productViewModel.Name;
+            updatedProduct.Description = productViewModel.Description;
+            updatedProduct.Value = productViewModel.Value;
+            updatedProduct.Active = productViewModel.Active;
+
+            await _productRepository.Update(_mapper.Map<Product>(updatedProduct));
 
             return RedirectToAction("Index");
         }

@@ -24,7 +24,7 @@ namespace Book_Shop.Data.Repository
 
         public virtual async Task<List<TEntity>> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.AsNoTrackingWithIdentityResolution().ToListAsync();
         }
 
         public virtual async Task<TEntity> GetById(Guid id)
