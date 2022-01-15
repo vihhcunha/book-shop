@@ -2,7 +2,9 @@
 using Book_Shop.Data.Context;
 using Book_Shop.Data.Repository;
 using Book_Shop.Web.Areas.Identity.Data;
+using Book_Shop.Web.Extensions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Book_Shop.Web
@@ -23,6 +25,7 @@ namespace Book_Shop.Web
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProviderRepository, ProviderRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddSingleton<IValidationAttributeAdapterProvider, MoneyValidationAttributeAdapterProvider>();
 
             services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddControllersWithViews();

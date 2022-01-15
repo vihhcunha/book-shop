@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Book_Shop.Web.Extensions;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Book_Shop.Web.ViewModels
@@ -25,6 +26,7 @@ namespace Book_Shop.Web.ViewModels
 
         public string? Image { get; set; }
 
+        [Money]
         [Required(ErrorMessage = "The field value it's mandatory.")]
         public decimal Value { get; set; }
 
