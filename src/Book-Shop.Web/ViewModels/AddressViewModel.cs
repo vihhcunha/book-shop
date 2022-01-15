@@ -17,7 +17,7 @@ namespace Book_Shop.Web.ViewModels
         [Required(ErrorMessage = "The field number it's mandatory.")]
         [StringLength(50, ErrorMessage = "The field {0} must have between {2} and {1} caracters.", MinimumLength = 1)]
         public string Number { get; set; }
-        public string Complement { get; set; }
+        public string? Complement { get; set; }
 
         [Required(ErrorMessage = "The field zip code it's mandatory.")]
         [StringLength(8, ErrorMessage = "The field {0} must have between {2} and {1} caracters.", MinimumLength = 8)]
@@ -36,6 +36,6 @@ namespace Book_Shop.Web.ViewModels
         public string State { get; set; }
 
         [HiddenInput]
-        public Provider Provider { get; set; }
+        public Provider? Provider { get; set; }
     }
 }

@@ -9,8 +9,8 @@ namespace Book_Shop.Web.Mapper
         public AutoMapperConfig()
         {
             CreateMap<Provider, ProviderViewModel>().ReverseMap();
-            CreateMap<ProductViewModel, ProductViewModel>().ReverseMap();
-            CreateMap<AddressViewModel, AddressViewModel>().ReverseMap();
+            CreateMap<Product, ProductViewModel>().ReverseMap();
+            CreateMap<Address, AddressViewModel>().ReverseMap();
         }
     }
 }

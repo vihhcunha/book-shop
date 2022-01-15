@@ -19,11 +19,11 @@ namespace Book_Shop.Web.ViewModels
         [DisplayName("Kind")]
         public int ProviderKind { get; set; }
 
-        public AddressViewModel Address { get; set; }
+        public AddressViewModel? Address { get; set; }
 
         [DisplayName("Active?")]
         public bool Active { get; set; }
 
-        public IEnumerable<ProductViewModel> Products { get; set; }
+        public IEnumerable<ProductViewModel>? Products { get; set; }
     }
 }

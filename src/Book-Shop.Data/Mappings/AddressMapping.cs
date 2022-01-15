@@ -23,6 +23,7 @@ namespace Book_Shop.Data.Mappings
                 .HasColumnType("varchar(8)");
 
             builder.Property(_ => _.Complement)
+                .IsRequired(false)
                 .HasColumnType("varchar(250)");
 
             builder.Property(_ => _.District)
