@@ -23,7 +23,7 @@ namespace Book_Shop.Web.ViewModels
         [DisplayName("Product image")]
         public IFormFile ImageUpload { get; set; }
 
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         [Required(ErrorMessage = "The field value it's mandatory.")]
         public decimal Value { get; set; }
@@ -34,7 +34,7 @@ namespace Book_Shop.Web.ViewModels
         [DisplayName("Active?")]
         public bool Active { get; set; }
 
-        public ProviderViewModel Provider { get; set; }
-        public IEnumerable<ProviderViewModel> Providers { get; set; }
+        public ProviderViewModel? Provider { get; set; }
+        public IEnumerable<ProviderViewModel>? Providers { get; set; }
     }
 }

@@ -49,9 +49,34 @@ namespace Book_Shop.Web.Controllers
             productViewModel = await PopulateProviders(productViewModel);
             if (!ModelState.IsValid) return View(productViewModel);
 
+            var imgPrefixo = Guid.NewGuid() + "_";
+            if (!await UploadFile(productViewModel.ImageUpload, imgPrefixo))
+            {
+                return View(productViewModel);
+            }
+            productViewModel.Image = imgPrefixo + productViewModel.ImageUpload.FileName;
             await _productRepository.Add(_mapper.Map<Product>(productViewModel));
 
             return RedirectToAction("Index");
+        }
+
+        private async Task<bool> UploadFile(IFormFile imageUpload, string imgPrefixo)
+        {
+            if (imageUpload.Length <= 0) return false;
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", imgPrefixo + imageUpload.FileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "This file already exists!");
+                return false;
+            }
+
+            using(var stream = new FileStream(path, FileMode.Create))
+            {
+                await imageUpload.CopyToAsync(stream);
+            }
+            return true;
         }
 
         public async Task<IActionResult> Edit(Guid id)

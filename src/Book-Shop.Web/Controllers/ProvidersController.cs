@@ -55,7 +55,7 @@ namespace Book_Shop.Web.Controllers
 
         public async Task<IActionResult> Edit(Guid id)
         {
-            var providerViewModel = GetProviderProductsAddress(id);
+            var providerViewModel = await GetProviderProductsAddress(id);
 
             if (providerViewModel == null)
             {
@@ -80,7 +80,7 @@ namespace Book_Shop.Web.Controllers
 
         public async Task<IActionResult> Delete(Guid id)
         {
-            var providerViewModel = GetProviderAddress(id);
+            var providerViewModel = await GetProviderAddress(id);
 
             if (providerViewModel == null)
             {

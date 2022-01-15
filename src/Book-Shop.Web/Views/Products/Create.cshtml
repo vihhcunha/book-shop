@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="ProviderId" class="control-label"></label>
                 <select asp-for="ProviderId" class="form-control" asp-items="@(new SelectList(Model.Providers, "Id", "Name"))">
-                    <option></option>
+                    <option value="">(Select a provider)</option>
                 </select>
 
                 <span asp-validation-for="ProviderId" class="text-danger"></span>
@@ -29,6 +29,17 @@
                 <label asp-for="Description" class="control-label"></label>
                 <textarea cols="40" rows="5" asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUpload" class="control-label"></label>
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="ImageUpload" asp-for="ImageUpload" />
+                    <label data-browse="Search" style="width: 400px" class="custom-file-label" for="ImageUpload"></label>
+                    <label style="display: none" id="img_name"></label>
+                </div>
+
+                <span asp-validation-for="ImageUpload" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Value" class="control-label"></label>
@@ -47,3 +58,17 @@
         </form>
     </div>
 </div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#ImageUpload').change(function(){
+            $('#img_name').text(this.files[0].name);
+            $('#img_name')[0].style.display = 'block';
+        })
+
+        $('#ImageUpload').attr("data-val", "true");
+        $('#ImageUpload').attr("data-val-required", "Choose a image");
+    </script>
+}
