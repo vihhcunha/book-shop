@@ -8,7 +8,7 @@ namespace Book_Shop.Web.ViewModels
     public class AddressViewModel
     {
         [Key]
-        public Guid ProviderId { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "The field street it's mandatory.")]
         [StringLength(200, ErrorMessage = "The field {0} must have between {2} and {1} caracters.", MinimumLength = 2)]
@@ -36,6 +36,6 @@ namespace Book_Shop.Web.ViewModels
         public string State { get; set; }
 
         [HiddenInput]
-        public Provider? Provider { get; set; }
+        public Guid? ProviderId { get; set; }
     }
 }

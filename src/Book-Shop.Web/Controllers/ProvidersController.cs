@@ -9,12 +9,14 @@ namespace Book_Shop.Web.Controllers
     public class ProvidersController : BaseController
     {
         private readonly IProviderRepository _providerRepository;
+        private readonly IAddressRepository _addressRepository;
         private readonly IMapper _mapper;
 
-        public ProvidersController(IProviderRepository providerRepository, IMapper mapper)
+        public ProvidersController(IProviderRepository providerRepository, IMapper mapper, IAddressRepository addressRepository)
         {
             _providerRepository = providerRepository;
             _mapper = mapper;
+            _addressRepository = addressRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -101,6 +103,45 @@ namespace Book_Shop.Web.Controllers
             await _providerRepository.Remove(id);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateAddress(Guid id)
+        {
+            var provider = await GetProviderAddress(id);
+
+            if (provider == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_UpdateAddress", new ProviderViewModel { Address = provider.Address });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateAddress(ProviderViewModel providerViewModel)
+        {
+            ModelState.Remove(nameof(providerViewModel.Name));
+            ModelState.Remove(nameof(providerViewModel.Document));
+            if (!ModelState.IsValid) return PartialView("_UpdateAddress", providerViewModel);
+
+            var address = _mapper.Map<Address>(providerViewModel.Address);
+            await _addressRepository.Update(address);
+
+            var url = Url.Action("GetAddress", "Providers", new { id = providerViewModel.Address.ProviderId });
+            return Json(new { success = true, url });
+        }
+
+        public async Task<IActionResult> GetAddress(Guid id)
+        {
+            var provider = await GetProviderAddress(id);
+
+            if (provider == null)
+            {
+                return NotFound();
+            }
+            return PartialView("_DetailsAddress", provider);
         }
 
         private async Task<ProviderViewModel> GetProviderAddress(Guid id)
