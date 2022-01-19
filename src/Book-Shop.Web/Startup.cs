@@ -2,6 +2,7 @@
 using Book_Shop.Data.Context;
 using Book_Shop.Data.Repository;
 using Book_Shop.Web.Areas.Identity.Data;
+using Book_Shop.Web.Configurations;
 using Book_Shop.Web.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
@@ -13,19 +14,11 @@ namespace Book_Shop.Web
     {
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("AspNetIdentityContextConnection");
-            services.AddDbContext<AspNetIdentityContext>(opt => opt.UseSqlServer(connectionString));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddDefaultUI()
-                .AddEntityFrameworkStores<AspNetIdentityContext>();
+            services.ConfigureDatabase(configuration);
 
             services.AddDbContext<BookShopContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<BookShopContext>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProviderRepository, ProviderRepository>();
-            services.AddScoped<IAddressRepository, AddressRepository>();
-            services.AddSingleton<IValidationAttributeAdapterProvider, MoneyValidationAttributeAdapterProvider>();
+            services.ResolveDependencies();
 
             services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddControllersWithViews();
