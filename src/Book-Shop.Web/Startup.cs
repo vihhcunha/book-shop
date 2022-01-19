@@ -1,12 +1,4 @@
-﻿using Book_Shop.Business.Interfaces;
-using Book_Shop.Data.Context;
-using Book_Shop.Data.Repository;
-using Book_Shop.Web.Areas.Identity.Data;
-using Book_Shop.Web.Configurations;
-using Book_Shop.Web.Extensions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Book_Shop.Web.Configurations;
 
 namespace Book_Shop.Web
 {
@@ -15,8 +7,6 @@ namespace Book_Shop.Web
         public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.ConfigureDatabase(configuration);
-
-            services.AddDbContext<BookShopContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.ResolveDependencies();
 
