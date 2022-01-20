@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Book_Shop.Web.Controllers
 {
+    [Route("providers")]
     public class ProvidersController : BaseController
     {
         private readonly IProviderRepository _providerRepository;
@@ -19,6 +20,7 @@ namespace Book_Shop.Web.Controllers
             _addressRepository = addressRepository;
         }
 
+        [Route("providers-list")]
         public async Task<IActionResult> Index()
         {
             var providerList = await _providerRepository.GetAll();
@@ -26,6 +28,7 @@ namespace Book_Shop.Web.Controllers
             return View(providerListViewModel);
         }
 
+        [Route("provider/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var providerViewModel = await GetProviderAddress(id);
@@ -38,12 +41,14 @@ namespace Book_Shop.Web.Controllers
             return View(providerViewModel);
         }
 
+        [Route("new-provider")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Route("new-provider")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProviderViewModel providerViewModel)
         {
@@ -55,6 +60,7 @@ namespace Book_Shop.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("edit-provider/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var providerViewModel = await GetProviderProductsAddress(id);
@@ -67,6 +73,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [HttpPost]
+        [Route("edit-provider/{id:guid}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProviderViewModel providerViewModel)
         {
@@ -80,6 +87,7 @@ namespace Book_Shop.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("delete-provider/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var providerViewModel = await GetProviderAddress(id);
@@ -93,6 +101,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Route("delete-provider/{id:guid}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
@@ -106,6 +115,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [HttpGet]
+        [Route("edit-address/{id:guid}")]
         public async Task<IActionResult> UpdateAddress(Guid id)
         {
             var provider = await GetProviderAddress(id);
@@ -119,6 +129,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [HttpPost]
+        [Route("edit-address/{id:guid}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAddress(ProviderViewModel providerViewModel)
         {

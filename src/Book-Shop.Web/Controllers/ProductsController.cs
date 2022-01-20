@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Book_Shop.Web.Controllers
 {
+    [Route("products")]
     public class ProductsController : BaseController
     {
         private readonly IProductRepository _productRepository;
@@ -19,11 +20,13 @@ namespace Book_Shop.Web.Controllers
             _providerRepository = providerRepository;
         }
 
+        [Route("product-list")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetProductsProviders()));
         }
 
+        [Route("product/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var productViewModel = await GetProduct(id);
@@ -36,6 +39,7 @@ namespace Book_Shop.Web.Controllers
             return View(productViewModel);
         }
 
+        [Route("new-product")]
         public async Task<IActionResult> Create()
         {
             var productViewModel = await PopulateProviders(new ProductViewModel());
@@ -44,6 +48,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [HttpPost]
+        [Route("new-product")]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
         {
             productViewModel = await PopulateProviders(productViewModel);
@@ -79,6 +84,7 @@ namespace Book_Shop.Web.Controllers
             return true;
         }
 
+        [Route("edit-product/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var productViewModel = await GetProduct(id);
@@ -92,6 +98,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [HttpPost]
+        [Route("edit-product/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id, ProductViewModel productViewModel)
         {
             if (id != productViewModel.Id) return NotFound();
@@ -121,6 +128,7 @@ namespace Book_Shop.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("delete-product/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var product = await GetProduct(id);
@@ -134,6 +142,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Route("delete-product/{id:guid}")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var product = await GetProduct(id);
