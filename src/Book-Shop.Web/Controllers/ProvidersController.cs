@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Book_Shop.Business.Interfaces;
+using Book_Shop.Business.Interfaces.Notifications;
+using Book_Shop.Business.Interfaces.Services;
 using Book_Shop.Business.Models;
 using Book_Shop.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -11,13 +13,19 @@ namespace Book_Shop.Web.Controllers
     {
         private readonly IProviderRepository _providerRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly IProviderService _providerService;
         private readonly IMapper _mapper;
 
-        public ProvidersController(IProviderRepository providerRepository, IMapper mapper, IAddressRepository addressRepository)
+        public ProvidersController(IProviderRepository providerRepository, 
+            IMapper mapper, 
+            IAddressRepository addressRepository, 
+            IProviderService providerService,
+            INotificator notificator) : base(notificator)
         {
             _providerRepository = providerRepository;
             _mapper = mapper;
             _addressRepository = addressRepository;
+            _providerService = providerService;
         }
 
         [Route("providers-list")]
@@ -55,7 +63,9 @@ namespace Book_Shop.Web.Controllers
             if (!ModelState.IsValid) return View(providerViewModel);
 
             var provider = _mapper.Map<Provider>(providerViewModel);
-            await _providerRepository.Add(provider);
+            await _providerService.Add(provider);
+
+            if (!ValidOperation()) return View(providerViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -82,7 +92,9 @@ namespace Book_Shop.Web.Controllers
             if (!ModelState.IsValid) return View(providerViewModel);
 
             var provider = _mapper.Map<Provider>(providerViewModel);
-            await _providerRepository.Update(provider);
+            await _providerService.Update(provider);
+
+            if (!ValidOperation()) return View(await GetProviderProductsAddress(id));
 
             return RedirectToAction(nameof(Index));
         }
@@ -109,7 +121,9 @@ namespace Book_Shop.Web.Controllers
 
             if(providerViewModel == null) return NotFound();
 
-            await _providerRepository.Remove(id);
+            await _providerService.Remove(id);
+
+            if (!ValidOperation()) return View(providerViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -138,7 +152,9 @@ namespace Book_Shop.Web.Controllers
             if (!ModelState.IsValid) return PartialView("_UpdateAddress", providerViewModel);
 
             var address = _mapper.Map<Address>(providerViewModel.Address);
-            await _addressRepository.Update(address);
+            await _providerService.UpdateAddress(address);
+
+            if (!ValidOperation()) return View(providerViewModel);
 
             var url = Url.Action("GetAddress", "Providers", new { id = providerViewModel.Address.ProviderId });
             return Json(new { success = true, url });

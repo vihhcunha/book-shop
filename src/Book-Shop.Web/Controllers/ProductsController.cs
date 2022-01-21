@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Book_Shop.Business.Interfaces;
+using Book_Shop.Business.Interfaces.Notifications;
+using Book_Shop.Business.Interfaces.Services;
 using Book_Shop.Business.Models;
 using Book_Shop.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -11,13 +13,19 @@ namespace Book_Shop.Web.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly IProviderRepository _providerRepository;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
-        public ProductsController(IProductRepository productRepository, IMapper mapper, IProviderRepository providerRepository)
+        public ProductsController(IProductRepository productRepository, 
+            IMapper mapper, 
+            IProviderRepository providerRepository, 
+            IProductService productService,
+            INotificator notificator) : base(notificator)
         {
             _productRepository = productRepository;
             _mapper = mapper;
             _providerRepository = providerRepository;
+            _productService = productService;
         }
 
         [Route("product-list")]
@@ -60,7 +68,9 @@ namespace Book_Shop.Web.Controllers
                 return View(productViewModel);
             }
             productViewModel.Image = imgPrefixo + productViewModel.ImageUpload.FileName;
-            await _productRepository.Add(_mapper.Map<Product>(productViewModel));
+            await _productService.Add(_mapper.Map<Product>(productViewModel));
+
+            if (!ValidOperation()) return View(productViewModel);
 
             return RedirectToAction("Index");
         }
@@ -123,7 +133,9 @@ namespace Book_Shop.Web.Controllers
             updatedProduct.Value = productViewModel.Value;
             updatedProduct.Active = productViewModel.Active;
 
-            await _productRepository.Update(_mapper.Map<Product>(updatedProduct));
+            await _productService.Update(_mapper.Map<Product>(updatedProduct));
+
+            if (!ValidOperation()) return View(productViewModel);
 
             return RedirectToAction("Index");
         }
@@ -152,7 +164,11 @@ namespace Book_Shop.Web.Controllers
                 return NotFound();
             }
 
-            await _productRepository.Remove(id);
+            await _productService.Remove(id);
+
+            if(!ValidOperation()) return View(product);
+
+            TempData["Success"] = "Product successfully deleted!";
 
             return RedirectToAction("Index");
         }
