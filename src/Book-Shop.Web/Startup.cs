@@ -1,4 +1,5 @@
 ﻿using Book_Shop.Web.Configurations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Book_Shop.Web
 {
@@ -11,7 +12,7 @@ namespace Book_Shop.Web
             services.ResolveDependencies();
 
             services.AddAutoMapper(typeof(Startup).Assembly);
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(o => o.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

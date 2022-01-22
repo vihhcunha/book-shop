@@ -63,7 +63,6 @@ namespace Book_Shop.Web.Controllers
 
         [HttpPost]
         [Route("new-provider")]
-        [ValidateAntiForgeryToken]
         [ClaimsAuthorize("Provider", "Add")]
         public async Task<IActionResult> Create(ProviderViewModel providerViewModel)
         {
@@ -93,7 +92,6 @@ namespace Book_Shop.Web.Controllers
         [HttpPost]
         [Route("edit-provider/{id:guid}")]
         [ClaimsAuthorize("Provider", "Edit")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProviderViewModel providerViewModel)
         {
             if (id != providerViewModel.Id) return NotFound();
@@ -124,7 +122,6 @@ namespace Book_Shop.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         [Route("delete-provider/{id:guid}")]
-        [ValidateAntiForgeryToken]
         [ClaimsAuthorize("Provider", "Delete")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
@@ -155,7 +152,6 @@ namespace Book_Shop.Web.Controllers
 
         [HttpPost]
         [Route("edit-address/{id:guid}")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAddress(ProviderViewModel providerViewModel)
         {
             ModelState.Remove(nameof(providerViewModel.Name));
