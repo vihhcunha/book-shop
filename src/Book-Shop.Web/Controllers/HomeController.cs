@@ -23,10 +23,14 @@ namespace Book_Shop.Web.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("error/{id:length(3,3)}")]
+        public IActionResult Errors(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var errorViewModel = ErrorViewModelBuilder.BuildError(id);
+
+            if (errorViewModel == null) return StatusCode(500);
+            
+            return View("Error", errorViewModel);
         }
     }
 }
