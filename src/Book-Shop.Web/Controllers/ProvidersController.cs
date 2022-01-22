@@ -3,12 +3,15 @@ using Book_Shop.Business.Interfaces;
 using Book_Shop.Business.Interfaces.Notifications;
 using Book_Shop.Business.Interfaces.Services;
 using Book_Shop.Business.Models;
+using Book_Shop.Web.Extensions;
 using Book_Shop.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_Shop.Web.Controllers
 {
     [Route("providers")]
+    [Authorize]
     public class ProvidersController : BaseController
     {
         private readonly IProviderRepository _providerRepository;
@@ -29,6 +32,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("providers-list")]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var providerList = await _providerRepository.GetAll();
@@ -37,6 +41,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("provider/{id:guid}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid id)
         {
             var providerViewModel = await GetProviderAddress(id);
@@ -50,6 +55,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("new-provider")]
+        [ClaimsAuthorize("Provider", "Add")]
         public IActionResult Create()
         {
             return View();
@@ -58,6 +64,7 @@ namespace Book_Shop.Web.Controllers
         [HttpPost]
         [Route("new-provider")]
         [ValidateAntiForgeryToken]
+        [ClaimsAuthorize("Provider", "Add")]
         public async Task<IActionResult> Create(ProviderViewModel providerViewModel)
         {
             if (!ModelState.IsValid) return View(providerViewModel);
@@ -71,6 +78,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("edit-provider/{id:guid}")]
+        [ClaimsAuthorize("Provider", "Edit")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var providerViewModel = await GetProviderProductsAddress(id);
@@ -84,6 +92,7 @@ namespace Book_Shop.Web.Controllers
 
         [HttpPost]
         [Route("edit-provider/{id:guid}")]
+        [ClaimsAuthorize("Provider", "Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProviderViewModel providerViewModel)
         {
@@ -100,6 +109,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("delete-provider/{id:guid}")]
+        [ClaimsAuthorize("Provider", "Delete")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var providerViewModel = await GetProviderAddress(id);
@@ -115,6 +125,7 @@ namespace Book_Shop.Web.Controllers
         [HttpPost, ActionName("Delete")]
         [Route("delete-provider/{id:guid}")]
         [ValidateAntiForgeryToken]
+        [ClaimsAuthorize("Provider", "Delete")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var providerViewModel = await GetProviderAddress(id);

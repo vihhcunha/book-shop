@@ -3,12 +3,15 @@ using Book_Shop.Business.Interfaces;
 using Book_Shop.Business.Interfaces.Notifications;
 using Book_Shop.Business.Interfaces.Services;
 using Book_Shop.Business.Models;
+using Book_Shop.Web.Extensions;
 using Book_Shop.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_Shop.Web.Controllers
 {
     [Route("products")]
+    [Authorize]
     public class ProductsController : BaseController
     {
         private readonly IProductRepository _productRepository;
@@ -29,12 +32,14 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("product-list")]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetProductsProviders()));
         }
 
         [Route("product/{id:guid}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid id)
         {
             var productViewModel = await GetProduct(id);
@@ -48,6 +53,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("new-product")]
+        [ClaimsAuthorize("Product", "Add")]
         public async Task<IActionResult> Create()
         {
             var productViewModel = await PopulateProviders(new ProductViewModel());
@@ -57,6 +63,7 @@ namespace Book_Shop.Web.Controllers
 
         [HttpPost]
         [Route("new-product")]
+        [ClaimsAuthorize("Product", "Add")]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
         {
             productViewModel = await PopulateProviders(productViewModel);
@@ -95,6 +102,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("edit-product/{id:guid}")]
+        [ClaimsAuthorize("Product", "Edit")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var productViewModel = await GetProduct(id);
@@ -109,6 +117,7 @@ namespace Book_Shop.Web.Controllers
 
         [HttpPost]
         [Route("edit-product/{id:guid}")]
+        [ClaimsAuthorize("Product", "Edit")]
         public async Task<IActionResult> Edit(Guid id, ProductViewModel productViewModel)
         {
             if (id != productViewModel.Id) return NotFound();
@@ -141,6 +150,7 @@ namespace Book_Shop.Web.Controllers
         }
 
         [Route("delete-product/{id:guid}")]
+        [ClaimsAuthorize("Product", "Delete")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var product = await GetProduct(id);
@@ -155,6 +165,7 @@ namespace Book_Shop.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         [Route("delete-product/{id:guid}")]
+        [ClaimsAuthorize("Product", "Delete")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var product = await GetProduct(id);
