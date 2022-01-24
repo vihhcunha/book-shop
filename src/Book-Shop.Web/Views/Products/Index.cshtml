@@ -4,10 +4,11 @@
     ViewData["Title"] = "Product List";
 }
 
-<h1>@ViewData["Title"]</h1>
-<hr />
+<div class="text-center p-3">
+    <h1>@ViewData["Title"]</h1>
+</div>
 
 <vc:Summary></vc:Summary>
-<a class="btn btn-info" asp-action="Create" disable-by-claim-name="Product" disable-by-claim-value="Add">New Product</a>
+<a class="btn btn-success" asp-action="Create" disable-by-claim-name="Product" disable-by-claim-value="Add">New Product</a>
 
 <partial name="_ProductList" />

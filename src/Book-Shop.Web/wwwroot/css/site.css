@@ -36,3 +36,8 @@ a, p, h3, h4 {
 .link-card {
     margin-top: 15px;
 }
+
+.hint {
+    font-style: italic;
+    font-size: 14px;
+}

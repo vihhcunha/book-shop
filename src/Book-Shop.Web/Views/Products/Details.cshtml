@@ -4,7 +4,9 @@
     ViewData["Title"] = "Product Detail - " + Model.Name;
 }
 
-<h4 style="padding-top: 50px">@ViewData["Title"]</h4>
+<div class="text-center p-3">
+    <h1>@ViewData["Title"]</h1>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -51,7 +53,7 @@
         </dl>
 
         <div>
-            <a class="btn btn-dark" sp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            <a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model.Id" disable-by-claim-name="Product" disable-by-claim-value="Edit">Edit</a>
             <a class="btn btn-info" href="javascript:window.history.back();">Back</a>
         </div>
     </div>

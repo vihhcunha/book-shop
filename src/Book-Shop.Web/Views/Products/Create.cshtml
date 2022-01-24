@@ -4,7 +4,9 @@
     ViewData["Title"] = "New Product";
 }
 
-<h3 style="padding-top: 50px">@ViewData["Title"] </h3>
+<div class="text-center p-3">
+    <h1>@ViewData["Title"]</h1>
+</div>
 
 <hr />
 <div class="row">
@@ -39,6 +41,7 @@
                     <label style="display: none" id="img_name"></label>
                 </div>
 
+                <p class="hint">Upload a image with width 300px and height 428px</p>
                 <span asp-validation-for="ImageUpload" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -52,7 +55,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-success" />
                 <a class="btn btn-info" asp-action="Index">Back</a>
             </div>
         </form>

@@ -4,7 +4,9 @@
     ViewData["Title"] = "New provider";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="text-center p-3">
+    <h1>@ViewData["Title"]</h1>
+</div>
 
 <hr />
 <div class="row">
@@ -34,12 +36,13 @@
                 </label>
             </div>
 
+            <div class="pt-4"></div>
             <h4>Address</h4>
             <hr />
             <partial name="_Address" />
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary"/>
+                <input type="submit" value="Save" class="btn btn-success"/>
                 <a class="btn btn-info" asp-action="Index">Back</a>
             </div>
         </form>

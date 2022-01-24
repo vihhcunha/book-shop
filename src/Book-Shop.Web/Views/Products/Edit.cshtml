@@ -4,7 +4,9 @@
     ViewData["Title"] = "Edit " + Model.Name;
 }
 
-<h4 style="padding-top: 30px">@ViewData["Title"] </h4>
+<div class="text-center p-3">
+    <h1>@ViewData["Title"]</h1>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-10">
@@ -12,10 +14,6 @@
             <vc:Summary></vc:Summary>
 
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Provider.Name" class="control-label"></label>
-                <p>@Model.Provider.Name</p>
-            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -39,6 +37,7 @@
                     <label style="display: none" id="img_name"></label>
                 </div>
 
+                <p class="hint">Upload a image with width 300px and height 428px</p>
                 <span asp-validation-for="ImageUpload" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -52,7 +51,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-success" />
                 <a class="btn btn-info" href="javascript:window.history.back();">Back</a>
             </div>
         </form>
