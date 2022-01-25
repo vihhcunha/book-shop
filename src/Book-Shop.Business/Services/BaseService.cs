@@ -15,6 +15,11 @@ namespace Book_Shop.Business.Services
             _notificator = notificator;
         }
 
+        protected void Notificate(string property, string errorMessage)
+        {
+            _notificator.Handle(new Notification(errorMessage, property));
+        }
+
         protected void Notificate(string errorMessage)
         {
             _notificator.Handle(new Notification(errorMessage));
@@ -24,7 +29,7 @@ namespace Book_Shop.Business.Services
         {
             foreach (var error in validationResult.Errors)
             {
-                Notificate(error.ErrorMessage);
+                Notificate(error.PropertyName, error.ErrorMessage);
             }  
         }
 

@@ -19,11 +19,11 @@ namespace Book_Shop.Business.Services
 
         public async Task Add(Provider provider)
         {
-            if (!ExecuteValidation(new ProviderValidation(), provider) && !ExecuteValidation(new AddressValidation(), provider.Address)) return;
+            if (!ExecuteValidation(new ProviderValidation(), provider) || !ExecuteValidation(new AddressValidation(), provider.Address)) return;
 
             if (_providerRepository.Search(_ => _.Document == provider.Document).Result.Any())
             {
-                Notificate("Already have a provider with the same document. Please insert a new one!");
+                Notificate("Already have a provider with the same document. Please insert a new one!", nameof(Provider.Document));
                 return;
             }
             
