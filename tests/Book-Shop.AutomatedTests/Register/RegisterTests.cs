@@ -9,7 +9,6 @@ namespace Book_Shop.AutomatedTests.Register
     {
         private readonly AutomationWebTestsFixture _testsFixture;
         private readonly RegisterPageHelper _pageHelper;
-        private string _urlRegistrationPage;
 
         public RegisterTests(AutomationWebTestsFixture fixture)
         {

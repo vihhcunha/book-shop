@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Login\" />
     <Folder Include="Products\" />
     <Folder Include="Provider\" />
   </ItemGroup>
