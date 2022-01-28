@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book-Shop.Data", "src\Book-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{078F7298-FFB4-4ED3-BCA1-A4AE79DF91A5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AutomatizedTests", "AutomatizedTests", "{24C81EC3-858C-44C3-820D-C956FDBE45D5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AutomatedTests", "AutomatedTests", "{24C81EC3-858C-44C3-820D-C956FDBE45D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book-Shop.Business.Tests", "tests\UnitTests\Book-Shop.Business.Tests\Book-Shop.Business.Tests.csproj", "{BE98B82A-1893-4E4D-98D6-738944585379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book-Shop.Business.Tests", "tests\UnitTests\Book-Shop.Business.Tests\Book-Shop.Business.Tests.csproj", "{BE98B82A-1893-4E4D-98D6-738944585379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book-Shop.AutomatedTests", "tests\Book-Shop.AutomatedTests\Book-Shop.AutomatedTests.csproj", "{074209E3-6BBF-4D99-B89F-B403DFC6AA63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{BE98B82A-1893-4E4D-98D6-738944585379}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE98B82A-1893-4E4D-98D6-738944585379}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE98B82A-1893-4E4D-98D6-738944585379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{074209E3-6BBF-4D99-B89F-B403DFC6AA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074209E3-6BBF-4D99-B89F-B403DFC6AA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074209E3-6BBF-4D99-B89F-B403DFC6AA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074209E3-6BBF-4D99-B89F-B403DFC6AA63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{078F7298-FFB4-4ED3-BCA1-A4AE79DF91A5} = {3B4C29C4-BF4B-42DC-A737-66B3B0999048}
 		{24C81EC3-858C-44C3-820D-C956FDBE45D5} = {3B4C29C4-BF4B-42DC-A737-66B3B0999048}
 		{BE98B82A-1893-4E4D-98D6-738944585379} = {078F7298-FFB4-4ED3-BCA1-A4AE79DF91A5}
+		{074209E3-6BBF-4D99-B89F-B403DFC6AA63} = {24C81EC3-858C-44C3-820D-C956FDBE45D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E01CC2C3-7CAF-4F90-8334-F9F93CFFE19B}
