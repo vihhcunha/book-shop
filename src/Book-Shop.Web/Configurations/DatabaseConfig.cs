@@ -11,7 +11,7 @@ namespace Book_Shop.Web.Configurations
         {
             var connectionString = configuration.GetConnectionString("AspNetIdentityContextConnection");
             services.AddDbContext<AspNetIdentityContext>(opt => opt.UseSqlServer(connectionString));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<AspNetIdentityContext>();
 
