@@ -72,7 +72,15 @@ namespace Book_Shop.AutomatedTests.Config
         public void FillTextBoxById(string idField, string fieldValue)
         {
             var field = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(idField)));
+            field.Clear();
             field.SendKeys(fieldValue);
+            BlurElement(idField);
+        }
+
+        public void BlurElement(string idElement)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)WebDriver;
+            js.ExecuteScript($"document.querySelector('#{idElement}').blur()");
         }
 
         public void FillDropDownById(string idField, string fieldValue)
