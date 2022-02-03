@@ -65,11 +65,6 @@ function SearchZipCode() {
 
                 if (cepValidate.test(zipCode)) {
 
-                    $("#Address_Street").val("...");
-                    $("#Address_District").val("...");
-                    $("#Address_City").val("...");
-                    $("#Address_Estado").val("...");
-
                     $.getJSON("https://viacep.com.br/ws/" + zipCode + "/json/?callback=?",
                         function (data) {
 
@@ -84,10 +79,6 @@ function SearchZipCode() {
                                 alert("Zip Code not found.");
                             }
                         });
-                }
-                else {
-                    clean_form_address();
-                    alert("Zip Code in a wrong format");
                 }
             }
             else {
