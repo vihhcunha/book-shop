@@ -74,10 +74,6 @@ function SearchZipCode() {
                                 $("#Address_City").val(data.localidade);
                                 $("#Address_State").val(data.uf);
                             } 
-                            else {
-                                clean_form_address();
-                                alert("Zip Code not found.");
-                            }
                         });
                 }
             }
