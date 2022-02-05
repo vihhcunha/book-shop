@@ -28,7 +28,7 @@ namespace Book_Shop.Web.Models
             return new ErrorViewModel
             {
                 Message = "An error occurred! Try again later.",
-                Title = "An error occurred!",
+                Title = "Woow! Something went wrong! :-(",
                 ErrorCode = 500
             };
         }
