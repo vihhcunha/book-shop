@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_Shop.Web.Migrations
 {
     [DbContext(typeof(AspNetIdentityContext))]
-    [Migration("20220110225630_InitialIdentity")]
-    partial class InitialIdentity
+    [Migration("20220205161716_InitialMigrationIdentity")]
+    partial class InitialMigrationIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

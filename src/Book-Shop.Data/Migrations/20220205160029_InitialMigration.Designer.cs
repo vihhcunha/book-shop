@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_Shop.Data.Migrations
 {
     [DbContext(typeof(BookShopContext))]
-    [Migration("20220115164657_FixingComplementRequiredToFalse")]
-    partial class FixingComplementRequiredToFalse
+    [Migration("20220205160029_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
