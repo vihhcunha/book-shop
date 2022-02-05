@@ -1,4 +1,5 @@
 ﻿using Book_Shop.Web.Configurations;
+using Book_Shop.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book_Shop.Web
@@ -22,6 +23,7 @@ namespace Book_Shop.Web
                 app.UseExceptionHandler("/error/500");
                 app.UseStatusCodePagesWithRedirects("/error/{0}");
                 app.UseHsts();
+                app.UseCustomErrorHandler();
             }
             else
             {
@@ -32,6 +34,8 @@ namespace Book_Shop.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSentryTracing();
 
             app.UseAuthentication();
             app.UseAuthorization();
