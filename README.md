@@ -1,5 +1,5 @@
 # Book Shop
-Project made for studying ASP.NET Core MVC framework
+Project made for studying ASP.NET Core MVC
 
 ## Technologies
 * ASP.NET Core MVC 6
