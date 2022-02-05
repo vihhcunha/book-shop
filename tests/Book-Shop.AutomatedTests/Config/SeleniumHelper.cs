@@ -77,6 +77,14 @@ namespace Book_Shop.AutomatedTests.Config
             BlurElement(idField);
         }
 
+        public void FillInputFileById(string idField, string fieldValue)
+        {
+            var field = WebDriver.FindElement(By.Id(idField));
+            field.Clear();
+            field.SendKeys(fieldValue);
+            BlurElement(idField);
+        }
+
         public void BlurElement(string idElement)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)WebDriver;
@@ -88,6 +96,14 @@ namespace Book_Shop.AutomatedTests.Config
             var field = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(idField)));
             var selectElement = new SelectElement(field);
             selectElement.SelectByValue(fieldValue);
+        }
+
+        public void FillDropDownByIdWithRandomItem(string idField)
+        {
+            var field = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(idField)));
+            var selectElement = new SelectElement(field);
+            var randomIndex = new Random().Next(0, selectElement.Options.Count - 1);
+            selectElement.SelectByIndex(randomIndex);
         }
 
         public string GetElementTextByCssClass(string className)
@@ -114,6 +130,21 @@ namespace Book_Shop.AutomatedTests.Config
         public bool CheckIfElementExistsById(string id)
         {
             return ElementExits(By.Id(id));
+        }
+
+        public bool SearchIfTextExistsInTable(string text, string xPathTable)
+        {
+            var table = Wait.Until(ExpectedConditions.ElementExists(By.XPath(xPathTable)));
+            var columns = table.FindElements(By.TagName("td"));
+
+            foreach (var column in columns)
+            {
+                if (column.Text == text)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void BackNavigation(int times = 1)
