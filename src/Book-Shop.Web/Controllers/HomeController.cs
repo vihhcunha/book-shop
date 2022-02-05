@@ -1,6 +1,5 @@
 ﻿using Book_Shop.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Book_Shop.Web.Controllers
 {
@@ -14,11 +13,6 @@ namespace Book_Shop.Web.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }

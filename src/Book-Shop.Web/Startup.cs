@@ -23,6 +23,10 @@ namespace Book_Shop.Web
                 app.UseStatusCodePagesWithRedirects("/error/{0}");
                 app.UseHsts();
             }
+            else
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
