@@ -7,6 +7,10 @@ public class ProductsPageHelper
     public string PageTableXPath => "/html/body/div/main/div[2]/table";
     public string NewProductLinkButtonXPath => "/html/body/div/main/a";
     public string NewPageTitleXPath => "/html/body/div/main/div[1]/h1";
+    public string SpanProviderXPath => "/html/body/div/main/div[2]/div/form/div[1]/span/span";
+    public string SpanNameXPath => "/html/body/div/main/div[2]/div/form/div[2]/span/span";
+    public string SpanDescriptionXPath => "/html/body/div/main/div[2]/div/form/div[3]/span/span";
+    public string SpanImageXPath => "/html/body/div/main/div[2]/div/form/div[4]/span/span";
 
     public SeleniumHelper _helper { get; set; }
     public ProductsPageHelper(SeleniumHelper helper)
@@ -33,6 +37,26 @@ public class ProductsPageHelper
     public string GetNewProductPageTitle()
     {
         return _helper.GetElementByXPath(NewPageTitleXPath).Text;
+    }
+
+    public string GetProviderSpanValue()
+    {
+        return _helper.GetElementByXPath(SpanProviderXPath).Text;
+    }
+
+    public string GetNameSpanValue()
+    {
+        return _helper.GetElementByXPath(SpanNameXPath).Text;
+    }
+
+    public string GetDescriptionSpanValue()
+    {
+        return _helper.GetElementByXPath(SpanDescriptionXPath).Text;
+    }
+
+    public string GetImageSpanValue()
+    {
+        return _helper.GetElementByXPath(SpanImageXPath).Text;
     }
 
     public void SetNameFieldValue(string value)

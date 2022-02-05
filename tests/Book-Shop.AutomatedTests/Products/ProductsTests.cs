@@ -62,5 +62,75 @@ public class ProductsTests
         Assert.Contains("Product List", _testsFixture.BrowserHelper.GetElementByXPathWaitingForTitle(_productsPageHelper.PageTitleXPath, "Product List").Text, StringComparison.InvariantCultureIgnoreCase);
         Assert.True(_testsFixture.BrowserHelper.SearchIfTextExistsInTable(name, _productsPageHelper.PageTableXPath));
     }
+
+    [Fact(DisplayName = "New product - validate name")]
+    [Trait("Category", "ProductsPage")]
+    public void ProductPage_AddNewProductWithEmptyName_MustShowErrorMessage()
+    {
+        var faker = new Faker();
+
+        _productsPageHelper.AccessAddProductPage();
+        _productsPageHelper.SetNameFieldValue("");
+        _productsPageHelper.SetProviderFieldValue();
+        _productsPageHelper.SetDescriptionFieldValue(faker.Commerce.ProductDescription());
+        _productsPageHelper.SetValueFieldValue(faker.Commerce.Price(1, 10000, 2));
+        _productsPageHelper.ChooseIfActive(true);
+        _productsPageHelper.SetImageFieldValue();
+        _productsPageHelper.SubmitForm();
+
+        Assert.Contains("mandatory", _productsPageHelper.GetNameSpanValue(), StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    [Fact(DisplayName = "New product - validate provider")]
+    [Trait("Category", "ProductsPage")]
+    public void ProductPage_AddNewProductWithEmptyProvider_MustShowErrorMessage()
+    {
+        var faker = new Faker();
+
+        _productsPageHelper.AccessAddProductPage();
+        _productsPageHelper.SetNameFieldValue(faker.Commerce.ProductName());
+        _productsPageHelper.SetDescriptionFieldValue("");
+        _productsPageHelper.SetValueFieldValue(faker.Commerce.Price(1, 10000, 2));
+        _productsPageHelper.ChooseIfActive(true);
+        _productsPageHelper.SetImageFieldValue();
+        _productsPageHelper.SubmitForm();
+
+        Assert.Contains("mandatory", _productsPageHelper.GetProviderSpanValue(), StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    [Fact(DisplayName = "New product - validate description")]
+    [Trait("Category", "ProductsPage")]
+    public void ProductPage_AddNewProductWithEmptyDescription_MustShowErrorMessage()
+    {
+        var faker = new Faker();
+
+        _productsPageHelper.AccessAddProductPage();
+        _productsPageHelper.SetProviderFieldValue();
+        _productsPageHelper.SetNameFieldValue(faker.Commerce.ProductName());
+        _productsPageHelper.SetDescriptionFieldValue("");
+        _productsPageHelper.SetValueFieldValue(faker.Commerce.Price(1, 10000, 2));
+        _productsPageHelper.ChooseIfActive(true);
+        _productsPageHelper.SetImageFieldValue();
+        _productsPageHelper.SubmitForm();
+
+        Assert.Contains("mandatory", _productsPageHelper.GetDescriptionSpanValue(), StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    [Fact(DisplayName = "New product - validate image")]
+    [Trait("Category", "ProductsPage")]
+    public void ProductPage_AddNewProductWithEmptyImage_MustShowErrorMessage()
+    {
+        var faker = new Faker();
+
+        _productsPageHelper.AccessAddProductPage();
+        _productsPageHelper.SetNameFieldValue(faker.Commerce.ProductName());
+        _productsPageHelper.SetProviderFieldValue();
+        _productsPageHelper.SetDescriptionFieldValue(faker.Commerce.ProductDescription());
+        _productsPageHelper.SetValueFieldValue(faker.Commerce.Price(1, 10000, 2));
+        _productsPageHelper.ChooseIfActive(true);
+        _productsPageHelper.SubmitForm();
+
+        Assert.Contains("choose", _productsPageHelper.GetImageSpanValue(), StringComparison.InvariantCultureIgnoreCase);
+    }
 }
 
