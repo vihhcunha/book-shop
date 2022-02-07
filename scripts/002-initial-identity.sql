@@ -116,3 +116,10 @@ GO
 
 COMMIT;
 GO
+
+INSERT INTO AspNetUsers(Id, UserName, NormalizedUserName, Email, NormalizedEmail, EmailConfirmed, PasswordHash, SecurityStamp, ConcurrencyStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, LockoutEnabled, AccessFailedCount)
+VALUES ('9804e94e-0608-45a3-ae44-6a6ffdbb1da6', 'test@test.com', 'TEST@TEST.COM', 'test@test.com', 'TEST@TEST.COM', 0, 'AQAAAAEAACcQAAAAEL/rENSTFyRYx08KSuc0ecerIxTkH4vwBwiZ8ZGUtHF8pd83WlHrCWrjtZg6WMiwLw==', 'NGCPAQWFNVPP6G2YWNKNBY4HVJK2TPMG', '2a24f8e7-2d31-4ddb-a5ae-902b6a61800c', NULL, 0, 0, NULL, 1, 0)
+
+INSERT INTO AspNetUserClaims(UserId, ClaimType, ClaimValue)
+VALUES('9804e94e-0608-45a3-ae44-6a6ffdbb1da6', 'Product', 'Add, Edit, Delete'),
+('9804e94e-0608-45a3-ae44-6a6ffdbb1da6', 'Provider', 'Add, Edit, Delete')
