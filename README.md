@@ -32,3 +32,6 @@ Project made for studying ASP.NET Core MVC
 
 ## How can I access it?
 https://book-shop.azurewebsites.net/
+
+* Login: test@test.com
+* Password: Test12#
