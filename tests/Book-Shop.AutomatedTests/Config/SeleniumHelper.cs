@@ -102,7 +102,7 @@ namespace Book_Shop.AutomatedTests.Config
         {
             var field = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(idField)));
             var selectElement = new SelectElement(field);
-            var randomIndex = new Random().Next(0, selectElement.Options.Count - 1);
+            var randomIndex = new Random().Next(1, selectElement.Options.Count - 1);
             selectElement.SelectByIndex(randomIndex);
         }
 
