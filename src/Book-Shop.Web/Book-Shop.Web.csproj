@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\bootstrap\css\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

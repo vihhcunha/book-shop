@@ -6,7 +6,12 @@
     <title>@ViewData["Title"] - Book Shop</title>
     <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/bootstrap/css/bootstrap-grid.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <environment include="Staging,Development">
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
     <link rel="stylesheet" href="~/font-awesome/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +52,14 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <environment include="Staging,Development">
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Production">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
