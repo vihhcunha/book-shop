@@ -29,9 +29,3 @@ Project made for studying ASP.NET Core MVC
 * Create two databases applying the scripts on scripts folder
 * Update the connection strings (if necessary)
 * You are good to go!
-
-## How can I access it?
-https://book-shop.azurewebsites.net/
-
-* Login: test@test.com
-* Password: Test12#
